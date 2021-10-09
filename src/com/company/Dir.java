@@ -1,5 +1,5 @@
 package com.company;
 
 public enum Dir {
-    LEFT,RIGHT,UP,DOWN,NONE
+    LEFT,RIGHT,UP,DOWN
 }

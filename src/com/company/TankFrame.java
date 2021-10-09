@@ -61,6 +61,10 @@ public class TankFrame extends Frame {
 
     Image offScreenImage = null;
 
+    /**
+     * 解决了屏幕上坦克闪烁的问题
+     * @param g
+     */
     @Override
     public void update(Graphics g) {
         if (offScreenImage == null) {
@@ -76,6 +80,10 @@ public class TankFrame extends Frame {
     }
     @Override
     public void paint(Graphics g){
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("子弹的数量:"+bulletList.size(),10,60);
+        g.setColor(c);
         myTank.paint(g);
         for (int i = 0;i < bulletList.size();i++) {
             bulletList.get(i).paint(g);
@@ -112,7 +120,6 @@ public class TankFrame extends Frame {
 
         private void setMainTankDir() {
             if(!bu && !bd && !bl && !br){
-                dir = Dir.NONE;
                 myTank.setIsMove(false);
             }else {
                 if (bu) myTank.setDir(Dir.UP);
