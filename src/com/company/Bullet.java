@@ -44,6 +44,13 @@ public class Bullet {
         if(x<0 || y<0 || x>800 || y>600){
             live = false;
         }
+        for(int i = 0; i < tf.enemyTankList.size(); i++){
+            Tank t = tf.enemyTankList.get(i);
+            if( x - t.getX() < 50 && y-t.getY() < 50 && x - t.getX() > 0 && y-t.getY() > 0){
+                t.setLive(false);
+                live = false;
+            }
+        }
 
     }
 

@@ -7,6 +7,16 @@ public class Tank {
     private Dir dir ;
     private final int SPEED = 5;
     private boolean isMove = false;
+
+    public boolean isLive() {
+        return live;
+    }
+
+    public void setLive(boolean live) {
+        this.live = live;
+    }
+
+    private boolean live = true;
     private TankFrame tf;
 
 
@@ -18,11 +28,21 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        if(!live){
+            tf.enemyTankList.remove(this);
+        }
+        Color c = g.getColor();
+        g.setColor(Color.BLUE);
+        g.fillRect(x,y,50,50);
+        g.setColor(c);
+        move();
+    }
+
+    public void paint(Graphics g,int x, int y) {
         Color c = g.getColor();
         g.setColor(Color.GREEN);
         g.fillRect(x,y,50,50);
         g.setColor(c);
-        move();
     }
 
     private void move() {

@@ -13,7 +13,11 @@ public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200,200,Dir.DOWN,this);
     List<Bullet> bulletList = new ArrayList<>();
+    List<Tank> enemyTankList = new ArrayList<>();
     public TankFrame(){
+        for(int i = 0; i < 5; i++){
+            enemyTankList.add(new Tank (700,500 - i * 70,Dir.DOWN,this));
+        }
         setSize(GAME_WIDTH,GAME_HEIGHT);
         setTitle("坦克大战");
         setResizable(false);
@@ -88,6 +92,9 @@ public class TankFrame extends Frame {
         for (int i = 0;i < bulletList.size();i++) {
             bulletList.get(i).paint(g);
         }
+        for (int i = 0;i < enemyTankList.size();i++) {
+            enemyTankList.get(i).paint(g);
+        }
     }
 
     class MyKeyListener extends KeyAdapter{
@@ -101,7 +108,7 @@ public class TankFrame extends Frame {
             int key = e.getKeyCode();
             switch (key){
                 case KeyEvent.VK_LEFT:
-                    bl=true;
+                    bl = true;
                     break;
                 case KeyEvent.VK_RIGHT:
                     br = true;
