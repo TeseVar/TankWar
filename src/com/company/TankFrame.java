@@ -11,12 +11,12 @@ import java.util.List;
 public class TankFrame extends Frame {
     private final int GAME_WIDTH = 800,GAME_HEIGHT = 600;
 
-    Tank myTank = new Tank(200,200,Dir.DOWN,this);
+    Tank myTank = new Tank(200,200,Color.BLUE,Dir.DOWN,this);
     List<Bullet> bulletList = new ArrayList<>();
     List<Tank> enemyTankList = new ArrayList<>();
     public TankFrame(){
         for(int i = 0; i < 5; i++){
-            enemyTankList.add(new Tank (700,500 - i * 70,Dir.DOWN,this));
+            enemyTankList.add(new Tank (700,500 - i * 70,Color.YELLOW,Dir.DOWN,this));
         }
         setSize(GAME_WIDTH,GAME_HEIGHT);
         setTitle("坦克大战");

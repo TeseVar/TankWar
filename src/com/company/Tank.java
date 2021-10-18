@@ -5,6 +5,7 @@ import java.awt.*;
 public class Tank {
     private int x , y;
     private Dir dir ;
+    private Color color ;
     private final int SPEED = 5;
     private boolean isMove = false;
 
@@ -20,9 +21,10 @@ public class Tank {
     private TankFrame tf;
 
 
-    public Tank(int x, int y, Dir dir,TankFrame tf) {
+    public Tank(int x, int y,Color color, Dir dir,TankFrame tf) {
         this.x = x;
         this.y = y;
+        this.color = color;
         this.dir = dir;
         this.tf = tf;
     }
@@ -32,7 +34,7 @@ public class Tank {
             tf.enemyTankList.remove(this);
         }
         Color c = g.getColor();
-        g.setColor(Color.BLUE);
+        g.setColor(color);
         g.fillRect(x,y,50,50);
         g.setColor(c);
         move();
@@ -40,7 +42,7 @@ public class Tank {
 
     public void paint(Graphics g,int x, int y) {
         Color c = g.getColor();
-        g.setColor(Color.GREEN);
+        g.setColor(color);
         g.fillRect(x,y,50,50);
         g.setColor(c);
     }
