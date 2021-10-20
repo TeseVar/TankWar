@@ -5,15 +5,17 @@ import java.awt.*;
 public class Bullet {
     private int x , y;
     private Dir dir ;
+    private Group group ;
     private boolean live = true;
     private final int SPEED = 10;
     private final int WIDTH = 8,HEIGHT = 8;
     TankFrame tf ;
 
-    public Bullet(int x, int y, Dir dir,TankFrame tf) {
+    public Bullet(int x, int y, Dir dir,Group group,TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
     public void paint(Graphics g) {
@@ -57,6 +59,9 @@ public class Bullet {
         }
         for(int i = 0; i < tf.enemyTankList.size(); i++){
             Tank t = tf.enemyTankList.get(i);
+            if (t.getGroup() == this.group){
+                return;
+            }
             if( x - t.getX() < 50 && y-t.getY() < 50 && x - t.getX() > 0 && y-t.getY() > 0){
                 t.setLive(false);
                 live = false;

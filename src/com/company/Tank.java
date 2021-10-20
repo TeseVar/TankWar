@@ -1,14 +1,26 @@
 package com.company;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Tank {
-    private int x , y;
-    private Dir dir ;
+    private int x, y;
+    private Dir dir;
     private Image image = ResourceManage.tankD;
-    private Color color ;
-    private final int SPEED = 5;
-    private boolean isMove = false;
+    private Color color;
+    private Group group = Group.BAD;
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    private Random random = new Random();
+    private final int SPEED = 1;
+    private boolean isMove = true;
 
     public boolean isLive() {
         return live;
@@ -22,7 +34,7 @@ public class Tank {
     private TankFrame tf;
 
 
-    public Tank(int x, int y,Color color, Dir dir,TankFrame tf) {
+    public Tank(int x, int y, Color color, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.color = color;
@@ -30,25 +42,30 @@ public class Tank {
         this.tf = tf;
     }
 
+    public Tank(int x, int y, Color color, Dir dir, Group group, TankFrame tf) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.dir = dir;
+        this.group = group;
+        this.tf = tf;
+    }
+
     public void paint(Graphics g) {
-        if(!live){
+        if (!live) {
             tf.enemyTankList.remove(this);
         }
-        paint(g,x,y);
+        paint(g, x, y);
         move();
     }
 
-    public void paint(Graphics g,int x, int y) {
-//        Color c = g.getColor();
-//        g.setColor(color);
-//        g.fillRect(x,y,50,50);
-//        g.setColor(c);
-        g.drawImage(image,x,y,null);
+    public void paint(Graphics g, int x, int y) {
+        g.drawImage(image, x, y, null);
     }
 
     private void move() {
-        if(!isMove) return;
-        switch (dir){
+        if (!isMove) return;
+        switch (dir) {
             case UP:
                 image = ResourceManage.tankU;
                 y -= SPEED;
@@ -66,10 +83,15 @@ public class Tank {
                 x += SPEED;
                 break;
         }
+        if (random.nextInt(100) > 90) {
+            fire();
+        }
     }
+
     public void fire() {
-        tf.bulletList.add(new Bullet((this.x + 22),(this.y + 22),this.dir,tf));
+        tf.bulletList.add(new Bullet((this.x + 20), (this.y + 20), this.dir, this.group, tf));
     }
+
     public boolean getIsMove() {
         return isMove;
     }
