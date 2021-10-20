@@ -63,6 +63,7 @@ public class Bullet {
                 return;
             }
             if( x - t.getX() < 50 && y-t.getY() < 50 && x - t.getX() > 0 && y-t.getY() > 0){
+                tf.boomList.add(new Boom(t.getX(),t.getY(),tf));
                 t.setLive(false);
                 live = false;
             }

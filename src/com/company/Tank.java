@@ -19,7 +19,7 @@ public class Tank {
     }
 
     private Random random = new Random();
-    private final int SPEED = 1;
+    private final int SPEED = 5;
     private boolean isMove = true;
 
     public boolean isLive() {
@@ -68,26 +68,38 @@ public class Tank {
         switch (dir) {
             case UP:
                 image = ResourceManage.tankU;
+                if(!(y <= 25))
                 y -= SPEED;
                 break;
             case DOWN:
                 image = ResourceManage.tankD;
+                if(!(y>=tf.getHeight() - 50))
                 y += SPEED;
                 break;
             case LEFT:
                 image = ResourceManage.tankL;
+                if(!(x<=0))
                 x -= SPEED;
                 break;
             case RIGHT:
                 image = ResourceManage.tankR;
-                x += SPEED;
+                if(!(x >= tf.getWidth() - 50))
+                    x += SPEED;
                 break;
         }
-        if (random.nextInt(100) > 90) {
+        if (random.nextInt(100) > 90 && Group.BAD == this.group) {
             fire();
+        }
+        if(Group.BAD == this.group) {
+            randomDir();
         }
     }
 
+    private void randomDir(){
+        if(random.nextInt(100) > 85) {
+            this.dir = Dir.values()[random.nextInt(4)];
+        }
+    }
     public void fire() {
         tf.bulletList.add(new Bullet((this.x + 20), (this.y + 20), this.dir, this.group, tf));
     }
