@@ -20,10 +20,21 @@ public class Bullet {
         if(!live){
             tf.bulletList.remove(this);
         }
-        Color c = g.getColor();
-        g.setColor(Color.red);
-        g.fillOval(x,y,WIDTH,HEIGHT);
-        g.setColor(c);
+        switch (dir){
+            case UP:
+                g.drawImage(ResourceManage.bulletU,x,y,null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceManage.bulletD,x,y,null);
+                break;
+            case LEFT:
+                g.drawImage(ResourceManage.bulletL,x,y,null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceManage.bulletR,x,y,null);
+                break;
+        }
+
         move();
     }
     private void move() {

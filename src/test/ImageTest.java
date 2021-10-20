@@ -17,7 +17,7 @@ public class ImageTest {
         try {
             BufferedImage read = ImageIO.read(file);
             Assertions.assertNotNull(read);
-            BufferedImage read2 = ImageIO.read(ImageTest.class.getClassLoader().getResourceAsStream("images/tankD.gif"));
+            BufferedImage read2 = ImageIO.read(ImageTest.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
             Assertions.assertNotNull(read2);
         } catch (IOException e) {
             e.printStackTrace();

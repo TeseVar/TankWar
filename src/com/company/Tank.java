@@ -5,6 +5,7 @@ import java.awt.*;
 public class Tank {
     private int x , y;
     private Dir dir ;
+    private Image image = ResourceManage.tankD;
     private Color color ;
     private final int SPEED = 5;
     private boolean isMove = false;
@@ -33,33 +34,35 @@ public class Tank {
         if(!live){
             tf.enemyTankList.remove(this);
         }
-        Color c = g.getColor();
-        g.setColor(color);
-        g.fillRect(x,y,50,50);
-        g.setColor(c);
+        paint(g,x,y);
         move();
     }
 
     public void paint(Graphics g,int x, int y) {
-        Color c = g.getColor();
-        g.setColor(color);
-        g.fillRect(x,y,50,50);
-        g.setColor(c);
+//        Color c = g.getColor();
+//        g.setColor(color);
+//        g.fillRect(x,y,50,50);
+//        g.setColor(c);
+        g.drawImage(image,x,y,null);
     }
 
     private void move() {
         if(!isMove) return;
         switch (dir){
             case UP:
+                image = ResourceManage.tankU;
                 y -= SPEED;
                 break;
             case DOWN:
+                image = ResourceManage.tankD;
                 y += SPEED;
                 break;
             case LEFT:
+                image = ResourceManage.tankL;
                 x -= SPEED;
                 break;
             case RIGHT:
+                image = ResourceManage.tankR;
                 x += SPEED;
                 break;
         }
